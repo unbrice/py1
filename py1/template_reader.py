@@ -28,6 +28,7 @@ import pkgutil
 import optparse
 import os
 import sys
+import warnings
 
 from py1 import curly
 from py1 import runner
@@ -46,6 +47,9 @@ class InvalidTemplateError(Error):
 
 def _get_template():
     """Returns the content of user_template_reader.py as a utf-8 string."""
+    # pkgutil.get_data triggers a ResourceWarnin'g on Python 3.2
+    if sys.version_info[:2] == (3, 2):
+        warnings.simplefilter('ignore', ResourceWarning)
     bytes = pkgutil.get_data(__name__, 'user_code_template.py')
     return bytes.decode('utf-8')
 
