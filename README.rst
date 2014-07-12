@@ -35,8 +35,13 @@ Just add ``--dump-code``.
 More!
 -----
 
-Interested? There is a tutorial.
-Or you can just look at the list of one letter functions and variables and figure out the rest.
+Interested? You can install with "pip install py1".
+
+To learn more you can read the
+`list of one letter functions and variables <http://py1.vleu.net/page/variables.html>`_
+or just look at
+`examples <http://py1.vleu.net/page/examples.html>`_
+and figure out the rest.
 
 How to contribute?
 ------------------
