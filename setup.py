@@ -35,6 +35,7 @@ core.setup(
 
     author='Brice Arnould',
     author_email='unbrice@vleu.net',
+    url='http://py1.readthedocs.org/',
 
     license='MIT',
 
@@ -77,6 +78,5 @@ core.setup(
         'console_scripts': [
             'py1 = py1.main:main',
         ],
-    }
-
+    },
 )
