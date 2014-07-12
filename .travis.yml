@@ -1,0 +1,11 @@
+language: python
+python:
+  - "3.0"
+  - "3.1"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+script:
+  - python -m unittest discover
+  # Checks that pip can install the package.
+  - pip install .
