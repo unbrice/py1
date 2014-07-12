@@ -46,7 +46,7 @@ class InvalidTemplateError(Error):
 
 def _get_template():
     """Returns the content of user_template_reader.py as a utf-8 string."""
-    bytes = pkgutil.get_data(__name__, 'user_template_reader.py')
+    bytes = pkgutil.get_data(__name__, 'user_code_template.py')
     return bytes.decode('utf-8')
 
 def _read_template_until(iterator, searched):
