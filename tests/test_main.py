@@ -29,7 +29,11 @@ De facto they serve as integration tests.
 
 import io
 import unittest
-from unittest import mock 
+try:
+    from unittest import mock
+except ImportError:
+    # Allows compatibility with Python < 3.3 if mock is installed.
+    import mock
 import sys
 
 from py1 import constants
