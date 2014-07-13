@@ -1,3 +1,6 @@
+.. highlight:: bash
+
+
 Examples
 ========
 
@@ -32,7 +35,7 @@ Show lines matching the regexp '$a+^'.
 
 .. code:: bash
 
-    py1 -l 'if M('$a+^', L): P(L)'
+    py1 -l 'if M("$a+^", L): P(L)'
 
 Here we use the M matching function to match the regexp.
 
@@ -54,5 +57,5 @@ Given a file of '$name $value', with name being repeated, sum the values for eac
 
 .. code:: bash
 
-    py1 -b 'd=defaultdict(int)' -l 'd[L[0]] += int(L[1])'  \
+    py1 -b 'd=defaultdict(int)' -l 'd[L[0]] += int(L[1])'
         -e 'for n, v in d: P(n, v)'

@@ -243,8 +243,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'py1', 'py1 Documentation',
-     ['Brice Arnould'], 1)
+    ('man', 'py1', 'sensible Python one-liners',
+    ['Brice Arnould'], 1)
 ]
 
 # If true, show URL addresses after external links.

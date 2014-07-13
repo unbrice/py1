@@ -5,25 +5,44 @@ One should use the right tool for the right task. But Learning 300 tools is coun
 
 Enters **py1**, it aims at being a "Python AWK". It can be used in two modes.
 
-In both modes indents and dedents can be replaced with “``{{``” and “``}}``”.
+In both modes indents and dedents can be replaced with “``{{``” and “``}}``”, line feeds can be replaced with “``;``”.
 
 Minimalist
 ----------
 
-You simply provide as a single argument the program with curly brackets.
+To use this mode:
 
-.. code:: bash
+.. code-block:: bash
 
-    py1 "for x in range(4): {{ print x; print x*2 }}"
+   py1 "python_one_liner"
+
+"{{" and "}}" can be used instead of indent/dedent, and ";" instead of line feed eg:
+
+.. code-block:: bash
+
+   py1 "import sys ; if True: {{ print(sys.version) }}"
+
 
 AWK-like
 --------
 
-You provide ``--begin``/``-b``, ``--each-line``/``-l``, ``--end``/``-e``. py1 generates a python script wrapping them and defining a convenient set of 1&2-letters variables and functions.
+In this mode, py1 generates a python script wrapping your code and defining a convenient set of 1&2-letters variables and functions.
 
-.. code:: bash
+To use this mode, pass any of ``--begin``/``-b``, ``--each-line``/``-l``, ``--end``/``-e``.
 
-    py1 --begin "count=0" --each-line "if 'cow' in L: count += 1" --end "P(count)"
+For example, to count lines matching ``'$a*^'``:
+
+.. code-block:: bash
+
+    py1 --begin "count=0" --each-line "if M('$a*^'): count += 1"
+        --end "P(count)"
+
+To learn more you can read the
+`list of one letter functions and variables <http://py1.vleu.net/page/variables.html>`_
+or just look at
+`examples <http://py1.vleu.net/page/examples.html>`_
+and figure out the rest.
+
 
 Sustainable hacking
 -------------------
@@ -42,6 +61,7 @@ To learn more you can read the
 or just look at
 `examples <http://py1.vleu.net/page/examples.html>`_
 and figure out the rest.
+
 
 How to contribute?
 ------------------
