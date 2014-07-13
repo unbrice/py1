@@ -75,7 +75,7 @@ Input
      - :py:class:`str` or :py:mod:`re`
 
 Output
-~~~~~
+~~~~~~
 
 .. list-table::
    :header-rows: 1

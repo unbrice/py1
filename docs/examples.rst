@@ -51,7 +51,7 @@ Count the number of blank lines in a file.
 Here we do not set a per-line statement and instead have sum iterate over F.
 
 Group by
-------
+--------
 
 Given a file of '$name $value', with name being repeated, sum the values for each name.
 
