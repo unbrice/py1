@@ -35,7 +35,7 @@ core.setup(
 
     author='Brice Arnould',
     author_email='unbrice@vleu.net',
-    url='http://py1.readthedocs.org/',
+    url='http://py1.vleu.net/',
 
     license='MIT',
 

@@ -5,7 +5,7 @@ Structure of this website
 .. toctree::
   :maxdepth: 2
 
-  index
+  intro
   examples
   variables
   internals
