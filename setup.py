@@ -22,10 +22,19 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from distutils import core
+from distutils.command import build
+import setuptools
+from sphinx import setup_command as sphinx_command
+
 from py1 import constants
 
-core.setup(
+class build(build.build):
+    sub_commands = build.build.sub_commands + [
+        ('build_sphinx', None),
+        ('build_man', None),
+    ]
+
+setuptools.setup(
     name=constants.NAME,
     version=constants.VERSION,
 
@@ -45,6 +54,19 @@ core.setup(
         'py1.main',
         'py1.runner',
     ],
+
+    # The manpage is build by an alias of build_sphinx
+    data_files=[('share/man/man1', ['build/sphinx/man/py1.1'])],
+    cmdclass = {
+        'build_man': sphinx_command.BuildDoc,
+        # Setups our build command that also builds the doc. 
+        'build': build,
+        },
+    command_options = {
+        'build_man': {
+            'builder': ('setup.py', 'man'),
+         },
+    },
 
     keywords = 'scripting awk one-liner oneliner',
 

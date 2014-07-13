@@ -4,7 +4,7 @@ python:
   - "3.3"
   - "3.4"
 install:
-  - pip install -r tests/requirements.txt
+  - pip install -r build-requirements.txt
 script:
   - python -m unittest discover
   # Checks that pip can install the package.

@@ -1,2 +1,10 @@
 include LICENSE.txt
 include README.rst
+
+# Tests
+recursive-include tests *.py *.txt
+
+# Docs
+recursive-include docs *.rst *.html *.py
+prune docs/_autosummary
+prune docs/_build

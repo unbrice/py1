@@ -1,0 +1,5 @@
+mock
+sphinx>=1.2
+sphinx_rtd_theme
+sphinxcontrib-napoleon
+
