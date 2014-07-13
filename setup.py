@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Copyright (c) 2013, Brice Arnould <unbrice@vleu.net>
 # All rights reserved.
 # Redistribution and use in source and binary forms, with or without
@@ -67,6 +68,9 @@ setuptools.setup(
             'builder': ('setup.py', 'man'),
          },
     },
+
+
+    test_suite='tests',
 
     keywords = 'scripting awk one-liner oneliner',
 
