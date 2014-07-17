@@ -28,6 +28,7 @@ import unittest
 
 from py1 import runner
 
+
 class TestRun(unittest.TestCase):
 
     def testOk(self):

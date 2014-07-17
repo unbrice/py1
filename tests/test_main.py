@@ -40,6 +40,7 @@ from py1 import constants
 from py1 import main
 from py1 import runner
 
+
 class TestMain(unittest.TestCase):
 
     def setUp(self):
@@ -68,7 +69,9 @@ class TestMain(unittest.TestCase):
     def testConflict(self):
         """Checks that line-mode and raw mode are incompatible."""
         with self.ioPatcher():
-            self.assertRaises(SystemExit, main.main, ['-b', 'print(42)', 'print(43)'])
+            self.assertRaises(
+                SystemExit, main.main, [
+                    '-b', 'print(42)', 'print(43)'])
 
         self.assertFalse(self.stdout.getvalue())
         self.assertIn('lonely code snippet', self.stderr.getvalue())

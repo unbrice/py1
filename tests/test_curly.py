@@ -29,6 +29,7 @@ import unittest
 
 from py1 import curly
 
+
 class TestUnescape(unittest.TestCase):
 
     def testExec(self):
