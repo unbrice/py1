@@ -4,8 +4,8 @@ python:
   - "3.3"
   - "3.4"
 install:
-  - pip install -r build-requirements.txt
-  - pip install coveralls
+  - pip install --use-wheel -r build-requirements.txt
+  - pip install --use-wheel coveralls
 script:
   - coverage run --source=py1 setup.py test
   # Checks that pip can install the package.
