@@ -101,8 +101,7 @@ def main(args=None):
         print(e.message, file=sys.stderr)
         print('You can see the unescaped code with --dump_code',
               file=sys.stderr)
-        return 1
-    return 0
+        sys.exit(1)
 
 
 if __name__ == "__main__":

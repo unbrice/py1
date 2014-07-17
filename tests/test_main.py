@@ -52,11 +52,22 @@ class TestMain(unittest.TestCase):
         return mock.patch.multiple(sys, stderr=self.stderr, stdout=self.stdout)
 
     def testRaw(self):
-        """Test running valid code."""
+        """Test running valid curly code."""
         mark = "The test has passed."
         with self.ioPatcher():
             main.main(['P("%s")' % mark])
         self.assertEqual(mark, self.stdout.getvalue().strip())
+        self.assertFalse(self.stderr.getvalue())
+
+    def testAwkLike(self):
+        """Test running valid code in awk-like mode."""
+        with self.ioPatcher():
+            main.main(['-b', 'import io; F=io.StringIO("85\\n12")',
+                       '-b', 'count = 0',
+                       '-l', 'count += int(L)',
+                       '-e', 'P("count=",  count)',
+                       ])
+        self.assertEqual("count= 97\n", self.stdout.getvalue())
         self.assertFalse(self.stderr.getvalue())
 
     def testHelp(self):
@@ -75,6 +86,21 @@ class TestMain(unittest.TestCase):
 
         self.assertFalse(self.stdout.getvalue())
         self.assertIn('lonely code snippet', self.stderr.getvalue())
+
+    def testSyntaxError(self):
+        with self.ioPatcher():
+            self.assertRaises(
+                SystemExit, main.main, ['{{'])
+        self.assertFalse(self.stdout.getvalue())
+        self.assertIn('Invalid program:', self.stderr.getvalue())
+
+    def testCodeFails(self):
+        with self.ioPatcher():
+            self.assertRaises(
+                SystemExit, main.main, ['raise Exception()'])
+        self.assertFalse(self.stdout.getvalue())
+        self.assertIn('Running the one-liner failed:', self.stderr.getvalue())
+
 
 if __name__ == '__main__':
     unittest.main()
