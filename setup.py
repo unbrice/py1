@@ -29,6 +29,7 @@ from sphinx import setup_command as sphinx_command
 
 from py1 import constants
 
+
 class build(build.build):
     sub_commands = build.build.sub_commands + [
         ('build_sphinx', None),
@@ -58,21 +59,21 @@ setuptools.setup(
 
     # The manpage is build by an alias of build_sphinx
     data_files=[('share/man/man1', ['build/sphinx/man/py1.1'])],
-    cmdclass = {
+    cmdclass={
         'build_man': sphinx_command.BuildDoc,
-        # Setups our build command that also builds the doc. 
+        # Setups our build command that also builds the doc.
         'build': build,
-        },
-    command_options = {
+    },
+    command_options={
         'build_man': {
             'builder': ('setup.py', 'man'),
-         },
+        },
     },
 
 
     test_suite='tests',
 
-    keywords = 'scripting awk one-liner oneliner',
+    keywords='scripting awk one-liner oneliner',
 
     # https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
@@ -100,7 +101,7 @@ setuptools.setup(
 
     packages=['py1'],
 
-    entry_points = {
+    entry_points={
         'console_scripts': [
             'py1 = py1.main:main',
         ],
