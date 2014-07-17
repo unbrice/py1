@@ -34,14 +34,16 @@ from py1 import curly
 from py1 import runner
 
 
-_FOR_LINE_INDENT = ' ' * 2
+_FOR_LINE_INDENT = ' ' * 4
 
 
 class Error(Exception):
+
     """Base class for errors from this module."""
 
 
 class InvalidTemplateError(Error):
+
     """Raised by build_code when the template is invalid."""
 
 
@@ -52,6 +54,7 @@ def _get_template():
         warnings.simplefilter('ignore', ResourceWarning)
     bytes = pkgutil.get_data(__name__, 'user_code_template.py')
     return bytes.decode('utf-8')
+
 
 def _read_template_until(iterator, searched):
     """Reads iterator until we find `searched`.
@@ -71,7 +74,7 @@ def _read_template_until(iterator, searched):
         if s == searched:
             return result
         result.append(s)
-    
+
     raise InvalidTemplateError('Could not find "%s"' % searched)
 
 
@@ -100,15 +103,16 @@ def build_code(begin, each_line, end):
         result.append('')
 
     for_loop = _read_template_until(
-        reader, '  # __________ INSERT USER CODE FOR --each-line HERE __________')
+        reader, _FOR_LINE_INDENT +
+        '# __________ INSERT USER CODE FOR --each-line HERE __________')
     if each_line:
         result.extend(for_loop)
         for s in each_line:
             result.append(_FOR_LINE_INDENT + '## --each-line')
             result.append(_FOR_LINE_INDENT
-                        + s.replace('\n', '\n' + _FOR_LINE_INDENT))
+                          + s.replace('\n', '\n' + _FOR_LINE_INDENT))
             result.append('')
- 
+
     result.extend(_read_template_until(
         reader, '# __________ INSERT USER CODE FOR --end HERE __________'))
     if end:

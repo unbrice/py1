@@ -29,6 +29,7 @@ from py1 import constants
 from py1 import curly
 from py1 import runner
 
+
 def _get_option_parser():
     p = argparse.ArgumentParser(
         description=constants.LONG_DESCRIPTION,
@@ -38,7 +39,8 @@ def _get_option_parser():
         dump_code=False,
     )
     p.add_argument('-c', '--dump-code', action='store_true')
-    p.add_argument('-V', '--version', action='version', version='%%(prog)s %s' % constants.VERSION)
+    p.add_argument('-V', '--version', action='version',
+                   version='%%(prog)s %s' % constants.VERSION)
     p.add_argument('-b', '--begin', action='append', default=[])
     p.add_argument('-e', '--end', action='append', default=[])
     p.add_argument('-l', '--each-line', action='append', default=[])
@@ -59,7 +61,7 @@ def _uncurl_list_or_die(escaped_list):
         try:
             result.append(curly.unescape(escaped))
         except curly.Error as e:
-            snippet =_abreviate(escaped)
+            snippet = _abreviate(escaped)
             print('Invalid program: "%s": %s' % (snippet, e), file=sys.stderr)
             sys.exit(1)
     return result
@@ -75,7 +77,8 @@ def main(args=None):
                 snippet = _abreviate(args.python_one_liner)
                 parser.error(
                     '--%s is specified yet there is a lonely code snippet, try'
-                    ' fixing quotes or adding --begin/-b before: "%s"' % (opt, snippet))
+                    ' fixing quotes or adding --begin/-b before: "%s"' %
+                    (opt, snippet))
         begin = [args.python_one_liner]
     else:
         begin = args.begin
@@ -106,6 +109,6 @@ if __name__ == "__main__":
     sys.exit(main())
 
 
-# echo 42foo43 | python3 -m main -b 'WRE="foo"' -l "P(W[0], int(W[1]) * 42)" 
-# echo 42 vs 43 | python3 -m main -l "vals=M('(\d+) vs (\d+)', L)"  -l 'P(int(vals[1]) + 1 == int(vals[2]))' -c
-
+# echo 42foo43 | python3 -m main -b 'WRE="foo"' -l "P(W[0], int(W[1]) * 42)"
+# echo 42 vs 43 | python3 -m main -l "vals=M('(\d+) vs (\d+)', L)"  -l
+# 'P(int(vals[1]) + 1 == int(vals[2]))' -c

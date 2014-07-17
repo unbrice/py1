@@ -12,4 +12,3 @@ In both modes indents and dedents can be replaced with "{{" and "}}".
 NAME = "py1"
 
 VERSION = "0.1"
-

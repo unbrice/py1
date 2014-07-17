@@ -28,7 +28,9 @@ import collections
 import io
 import tokenize
 
+
 class Token(collections.namedtuple('_Token', 'num val')):
+
     """Represents a single Token.
 
     Attributes:
@@ -38,6 +40,7 @@ class Token(collections.namedtuple('_Token', 'num val')):
 
 
 class TokenAndPos(collections.namedtuple('_TokenAndPost', 'token start end')):
+
     """Represents a single Token and its position.
 
     Attributes:
@@ -46,11 +49,14 @@ class TokenAndPos(collections.namedtuple('_TokenAndPost', 'token start end')):
         end: a (row, col) tuple specifying where the token ends.
     """
 
+
 class Error(Exception):
+
     """Base class for errors from this module."""
 
 
 class Mismatch(Error):
+
     """There is not the same number of '{{' and '}}'."""
 
     def __init__(self, message, token_and_pos):
@@ -60,6 +66,7 @@ class Mismatch(Error):
 
 
 class CannotTokenize(Error):
+
     """Raised when the tokenize module failed."""
 
     def __init__(self, message, position):
@@ -71,6 +78,7 @@ class CannotTokenize(Error):
 _DEDENT_TOKEN = Token(tokenize.OP, '}')
 _INDENT_TOKEN = Token(tokenize.OP, '{')
 _NL_TOKEN = Token(tokenize.OP, ';')
+
 
 def _unescape_tokens(tokens):
     """Substitutes '{{' by tokenize.INDENT and '}}' by tokenize.DEDENT.
@@ -114,6 +122,7 @@ def _unescape_tokens(tokens):
             yield token
     if level:
         raise Mismatch('More "{{" than "}}"', token_and_pos)
+
 
 def unescape(code_str):
     """Substitutes '{{' by indents and '}}' by dedents.

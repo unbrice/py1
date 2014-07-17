@@ -29,10 +29,12 @@ import traceback
 
 
 class Error(Exception):
+
     """Base class for errors from this module."""
 
 
 class RunFailed(Error):
+
     """The user-provided code failed."""
 
     def __init__(self, message):
