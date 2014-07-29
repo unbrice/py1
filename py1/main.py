@@ -24,10 +24,12 @@
 
 import argparse
 import sys
+
 from py1 import template_reader
 from py1 import constants
 from py1 import curly
 from py1 import runner
+from py1 import tty
 
 
 def _get_option_parser():
@@ -90,6 +92,12 @@ def main(args=None):
     )
 
     if args.dump_code:
+        if sys.stdout.isatty():
+            try:
+                colors = tty.count_ansi_colors()
+                code = tty.ansi_highlight_code(code, colors)
+            except:
+                pass  # Never fail on highlighting.
         print(code)
         return 0
 

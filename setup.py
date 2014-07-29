@@ -70,8 +70,11 @@ setuptools.setup(
         },
     },
 
-
     test_suite='tests',
+
+    install_requires=[
+        'pygments>=0.10',
+    ],
 
     keywords='scripting awk one-liner oneliner',
 
