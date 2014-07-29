@@ -54,10 +54,12 @@ def count_ansi_colors(term_name=None):
         term_name = os.getenv('TERM')
 
     # We hardcode a few values as curses does not reload terminfo on subsequent
-    # calls to setupterm.
-    if term_name == 'xterm-256color':
+    # calls to setupterm and terminfo often is mis-installed.
+    if term_name.endswith('-256color'):
         return 256
-    elif term_name == 'xterm':
+    if term_name.endswith('-16color'):
+        return 16
+    elif term_name in ['xterm', 'hterm', 'screen']:
         return 8
     elif term_name == 'unknown':
         return 0

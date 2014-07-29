@@ -39,8 +39,8 @@ class TestColors(unittest.TestCase):
     def test_count_ansi_colors_terminfo(self):
         """Validates tty.count_ansi_colors while reading termingo ."""
         # This is not hardcoded and will cause a ncurse lookup.
-        # Afterward ncurse will always return 0 :-(
-        colors = tty.count_ansi_colors('xterm-16color')
+        # Afterward ncurse will always return the value from its lookup :-(
+        colors = tty.count_ansi_colors('screen-16color-s')
         # Accepts 0 as the test host might not have a valid terminfo setup.
         self.assertIn(colors, (0, 16))
 
@@ -48,7 +48,11 @@ class TestColors(unittest.TestCase):
         """Validates tty.count_ansi_colors with a few known-good."""
         for term_name, count in (
                 ('xterm-256color', 256),
+                ('xterm-16color', 16),
                 ('xterm', 8),
+                ('screen-256color', 256),
+                ('screen-16color', 16),
+                ('screen', 8),
                 ('unknown', 0),
         ):
             self.assertEqual(count, tty.count_ansi_colors(term_name))
