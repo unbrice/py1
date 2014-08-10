@@ -1,3 +1,6 @@
+Introduction
+------------
+
 .. image:: https://travis-ci.org/unbrice/py1.svg?branch=master
     :target: https://travis-ci.org/unbrice/py1
 
@@ -7,8 +10,10 @@
 .. image:: https://gemnasium.com/unbrice/py1.svg
     :target: https://gemnasium.com/unbrice/py1
 
-.. note: this file is also included by docs/index.rst, from this line onwards
+This is an excerpt, you can find the `full documentation on ReadTheDocs <http://py1.vleu.net/>`_.
+
 .. FILTER_SPHINX_DOC_BEFORE_THIS_LINE
+.. note: this file is also included by docs/index.rst, from this line onwards
 
 One should use the right tool for the right task. But Learning 300 tools is counterproductive, so one needs a fallback. To be generic enough that fallback must be scriptable. So we have AWK, Perl, Sed, TCL... and their read-only languages.
 
@@ -63,7 +68,7 @@ Just add ``--dump-code``.
 More!
 -----
 
-Interested? You can install with "pip install py1".
+Interested? You can install with "pip install py1cmd".
 
 To learn more you can read the
 `list of one letter functions and variables <http://py1.vleu.net/page/variables.html>`_
