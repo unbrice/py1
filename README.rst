@@ -1,5 +1,14 @@
-.. note: this file is also included by docs/index.rst
+.. image:: https://travis-ci.org/unbrice/py1.svg?branch=master
+    :target: https://travis-ci.org/unbrice/py1
 
+.. image:: https://coveralls.io/repos/unbrice/py1/badge.png?branch=master
+  :target: https://coveralls.io/r/unbrice/py1?branch=master
+
+.. image:: https://gemnasium.com/unbrice/py1.svg
+    :target: https://gemnasium.com/unbrice/py1
+
+.. note: this file is also included by docs/index.rst, from this line onwards
+.. FILTER_SPHINX_DOC_BEFORE_THIS_LINE
 
 One should use the right tool for the right task. But Learning 300 tools is counterproductive, so one needs a fallback. To be generic enough that fallback must be scriptable. So we have AWK, Perl, Sed, TCL... and their read-only languages.
 
