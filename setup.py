@@ -36,8 +36,9 @@ class build(build.build):
         ('build_man', None),
     ]
 
+
 setuptools.setup(
-    name=constants.NAME,
+    name=constants.NAME + 'cmd',
     version=constants.VERSION,
 
     description=constants.DESCRIPTION,
