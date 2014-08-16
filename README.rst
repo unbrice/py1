@@ -1,3 +1,6 @@
+.. image:: https://readthedocs.org/projects/py1/badge/?version=latest
+    :target: http://py1.vleu.net
+
 .. image:: https://travis-ci.org/unbrice/py1.svg?branch=master
     :target: https://travis-ci.org/unbrice/py1
 
