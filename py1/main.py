@@ -111,11 +111,3 @@ def main(args=None):
               file=sys.stderr)
         sys.exit(1)
 
-
-if __name__ == "__main__":
-    sys.exit(main())
-
-
-# echo 42foo43 | python3 -m main -b 'WRE="foo"' -l "P(W[0], int(W[1]) * 42)"
-# echo 42 vs 43 | python3 -m main -l "vals=M('(\d+) vs (\d+)', L)"  -l
-# 'P(int(vals[1]) + 1 == int(vals[2]))' -c
