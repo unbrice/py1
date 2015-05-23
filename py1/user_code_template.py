@@ -16,7 +16,7 @@ import sys
 import os
 from collections import defaultdict
 
-# Program conveniency variables.
+# Conveniency variables.
 ENV = os.environ   # ENV: dict of Environment strings
 # Input
 F = sys.stdin    # F: input File, defaults to stdin

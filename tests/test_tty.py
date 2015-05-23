@@ -34,7 +34,7 @@ class TestColors(unittest.TestCase):
 
     def setUp(self):
         self.test_code = template_reader.build_code(
-            ['c = 0'], ['c += 1'], ['P(c)'])
+            ['c = 0'], ['c += 1'], ['P(c)'], concise=False)
 
     def test_count_ansi_colors_terminfo(self):
         """Validates tty.count_ansi_colors while reading termingo ."""

@@ -32,6 +32,9 @@ from py1 import runner
 from py1 import tty
 
 
+_ARG_CONCISE = 'concise'
+_ARG_FULL = 'full'
+
 def _get_option_parser():
     p = argparse.ArgumentParser(
         description=constants.LONG_DESCRIPTION,
@@ -40,7 +43,10 @@ def _get_option_parser():
     p.set_defaults(
         dump_code=False,
     )
-    p.add_argument('-c', '--dump-code', action='store_true')
+    p.add_argument('-c', '--dump-code', '--code',
+                   default=False,  # Value if not provided
+                   const=_ARG_CONCISE,  # Value if provided without argument
+                   nargs='?', choices=[_ARG_CONCISE, _ARG_FULL])
     p.add_argument('-V', '--version', action='version',
                    version='%%(prog)s %s' % constants.VERSION)
     p.add_argument('-b', '--begin', action='append', default=[])
@@ -89,6 +95,7 @@ def main(args=None):
         begin=_uncurl_list_or_die(begin),
         each_line=_uncurl_list_or_die(args.each_line),
         end=_uncurl_list_or_die(args.end),
+        concise=args.dump_code == _ARG_CONCISE,
     )
 
     if args.dump_code:
@@ -107,7 +114,7 @@ def main(args=None):
     except runner.RunFailed as e:
         print('Running the one-liner failed:', file=sys.stderr)
         print(e.message, file=sys.stderr)
-        print('You can see the unescaped code with --dump_code',
+        print('You can see the unescaped code with --code=full',
               file=sys.stderr)
         sys.exit(1)
 

@@ -34,16 +34,14 @@ from py1 import curly
 from py1 import runner
 
 
-_FOR_LINE_INDENT = ' ' * 4
+_TOP_LEVEL_INDENT = ' ' * 4
 
 
 class Error(Exception):
-
     """Base class for errors from this module."""
 
 
 class InvalidTemplateError(Error):
-
     """Raised by build_code when the template is invalid."""
 
 
@@ -78,13 +76,41 @@ def _read_template_until(iterator, searched):
     raise InvalidTemplateError('Could not find "%s"' % searched)
 
 
-def build_code(begin, each_line, end):
+def _sum_up_defs(iterator):
+    """Yields the first lines of top level blocks in the code it iterates on.
+
+    Also coalesces consecutive line feeds.
+    Assumes an indent of _TOP_LEVEL_INDENT.
+
+    Args:
+      iterator: Iterator over lines of python code as string.
+    """
+    previous_line = '_begining of file_'
+    for line in iterator:
+        stripped = line.strip()
+        if not stripped:
+            continue
+        elif line.startswith(_TOP_LEVEL_INDENT):
+            if previous_line.startswith('def') and stripped.startswith('"""'):
+                if stripped.endswith('"""'):
+                    yield line
+                else:
+                    yield line + '[...]"""'
+                yield _TOP_LEVEL_INDENT + '# [Pass --code=full for full code]'
+        elif stripped:
+            yield line
+        previous_line = line
+
+
+def build_code(begin, each_line, end, concise):
     """Instantiates the templates running the specified code.
 
     Args:
       begin: List of strings, will be run before the main loop.
       each_line: List of strings, will be run in the main loop.
       end: List of strings, will be run just after the main loop.
+      concise: boolean, if true the code won't actually be runnable but will
+        be shorter.
     """
     result = []
 
@@ -95,22 +121,25 @@ def build_code(begin, each_line, end):
     _read_template_until(
         reader, '# __________ REMOVE EVERYTHING ABOVE __________')
 
-    result.extend(_read_template_until(
-        reader, '# __________ INSERT USER CODE FOR --begin HERE __________'))
+    prelude = _read_template_until(
+        reader, '# __________ INSERT USER CODE FOR --begin HERE __________')
+    if concise:
+        prelude = _sum_up_defs(prelude)
+    result.extend(prelude)
     if begin:
         result.append('## --begin')
         result += begin
         result.append('')
 
     for_loop = _read_template_until(
-        reader, _FOR_LINE_INDENT +
+        reader, _TOP_LEVEL_INDENT +
         '# __________ INSERT USER CODE FOR --each-line HERE __________')
     if each_line:
         result.extend(for_loop)
         for s in each_line:
-            result.append(_FOR_LINE_INDENT + '## --each-line')
-            result.append(_FOR_LINE_INDENT
-                          + s.replace('\n', '\n' + _FOR_LINE_INDENT))
+            result.append(_TOP_LEVEL_INDENT + '## --each-line')
+            result.append(_TOP_LEVEL_INDENT
+                          + s.replace('\n', '\n' + _TOP_LEVEL_INDENT))
             result.append('')
 
     result.extend(_read_template_until(
