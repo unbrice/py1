@@ -29,7 +29,7 @@ Awk-like mode
 
 In this mode, py1 generates a python script wrapping your code and defining a convenient set of 1&2-letters variables and functions.
 
-To use this mode, pass any of **-b**/**--begin**, **-l**/**q--each-line**, **-e**/**--end**.
+To use this mode, pass any of **-b**/**--begin**, **-l**/**--each-line**, **-e**/**--end**.
 
 For example, to count lines matching '$a*^':
 
@@ -43,14 +43,16 @@ For more examples, please see `http://py1.vleu.net/examples.html`, for the defin
 Options
 -------
   
-  -h, --help            show an help message and exit
+  -h, --help             show an help message and exit
 
-  -c, --dump-code       show the code that would have been run
-  
-  -V, --version         show program's version number and exit
-  
-  -b BEGIN, --begin BEGIN   as per "Awk-like mode" above
+  -b PY, --begin PY      code run once first
 
-  -e END, --end END   as per "Awk-like mode" above
+  -e PY, --end PY        code run once at the end
   
-  -l EACH_LINE, --each-line EACH_LINE   as per "Awk-like mode" above
+  -l PY, --each-line PY  code run each line
+
+  -c, --code             show the code that would have run, abbreviated
+
+  -c=full, --code=full   show the entirety of the code that would have run
+  
+  -V, --version          show program's version number and exit

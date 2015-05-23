@@ -57,5 +57,5 @@ Given a file of '$name $value', with name being repeated, sum the values for eac
 
 .. code:: bash
 
-    py1 -b 'd=defaultdict(int)' -l 'd[L[0]] += int(L[1])'
+    py1 -b 'd=defaultdict(int)' -l 'd[W[0]] += int(W[1])'
         -e 'for n, v in d: P(n, v)'

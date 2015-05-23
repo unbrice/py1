@@ -39,20 +39,26 @@ def _get_option_parser():
     p = argparse.ArgumentParser(
         description=constants.LONG_DESCRIPTION,
         prog=constants.NAME,
+        formatter_class=argparse.RawTextHelpFormatter,
+        epilog=constants.EPILOG,
     )
     p.set_defaults(
         dump_code=False,
     )
+    p.add_argument('-b', '--begin', action='append', default=[],
+                   metavar='PY', help='Code run once first.')
+    p.add_argument('-l', '--each-line', action='append', default=[],
+                   metavar='PY', help='Code run each line.')
+    p.add_argument('-e', '--end', action='append', default=[],
+                   metavar='PY', help='Code run once at the end.')
     p.add_argument('-c', '--dump-code', '--code',
                    default=False,  # Value if not provided
                    const=_ARG_CONCISE,  # Value if provided without argument
-                   nargs='?', choices=[_ARG_CONCISE, _ARG_FULL])
+                   nargs='?', choices=[_ARG_CONCISE, _ARG_FULL],
+                   help='Show the code instead of executing it.')
     p.add_argument('-V', '--version', action='version',
                    version='%%(prog)s %s' % constants.VERSION)
-    p.add_argument('-b', '--begin', action='append', default=[])
-    p.add_argument('-e', '--end', action='append', default=[])
-    p.add_argument('-l', '--each-line', action='append', default=[])
-    p.add_argument('python_one_liner', nargs='?')
+    p.add_argument('python_one_liner', nargs='?', metavar='PYTHON_ONE_LINER')
     return p
 
 
