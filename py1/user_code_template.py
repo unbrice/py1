@@ -86,7 +86,7 @@ def _split_words(line):
 for LN, R in enumerate(F):
     # Line conveniency variables.
     L = R.strip()           # L: Line without surrounding whitespaces.
-    W = _split_words(L)     # W: Words split on WS or WRE
+    W = _split_words(R)     # W: Words split on WS or WRE
     NW = len(W)             # Number of words
     # __________ INSERT USER CODE FOR --each-line HERE __________
 
