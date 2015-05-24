@@ -58,7 +58,7 @@ def _get_option_parser():
                    help='Show the code instead of executing it.')
     p.add_argument('-V', '--version', action='version',
                    version='%%(prog)s %s' % constants.VERSION)
-    p.add_argument('python_one_liner', nargs='?', metavar='PYTHON_ONE_LINER')
+    p.add_argument('single_snippet', nargs='?', metavar='single_snippet')
     return p
 
 
@@ -84,16 +84,16 @@ def _uncurl_list_or_die(escaped_list):
 def main(args=None):
     parser = _get_option_parser()
     args = parser.parse_args(args)
-    if args.python_one_liner:
-        # We expect no options if given a one liner.
+    if args.single_snippet:
+        # We expect no options if given a single snippet.
         for opt in ('begin', 'end', 'each_line'):
             if getattr(args, opt):
-                snippet = _abreviate(args.python_one_liner)
+                snippet = _abreviate(args.single_snippet)
                 parser.error(
                     '--%s is specified yet there is a lonely code snippet, try'
                     ' fixing quotes or adding --begin/-b before: "%s"' %
                     (opt, snippet))
-        begin = [args.python_one_liner]
+        begin = [args.single_snippet]
     else:
         begin = args.begin
 
