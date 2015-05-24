@@ -85,21 +85,23 @@ def _sum_up_defs(iterator):
     Args:
       iterator: Iterator over lines of python code as string.
     """
-    previous_line = '_begining of file_'
+    show_pydoc = False
     for line in iterator:
         stripped = line.strip()
+        hidden_def = stripped.startswith('def _')
         if not stripped:
             continue
         elif line.startswith(_TOP_LEVEL_INDENT):
-            if previous_line.startswith('def') and stripped.startswith('"""'):
+            if show_pydoc and stripped.startswith('"""'):
                 if stripped.endswith('"""'):
                     yield line
                 else:
                     yield line + '[...]"""'
                 yield _TOP_LEVEL_INDENT + '# [Pass --code=full for full code]'
-        elif stripped:
+            show_pydoc = False
+        elif not hidden_def:
             yield line
-        previous_line = line
+        show_pydoc = stripped.startswith('def ') and not hidden_def
 
 
 def build_code(begin, each_line, end, concise):

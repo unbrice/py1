@@ -57,7 +57,7 @@ def M(pattern, string=None, flags=0):
 
 
 def S(pattern, repl, string=None, count=0, flags=0):
-    """Substitute pattern with repl in string (or R if string is None).
+    """Substitutes pattern with repl in string (or R if string is None).
 
     Args:
       pattern (str): The regexp to match on.
@@ -73,16 +73,20 @@ def S(pattern, repl, string=None, count=0, flags=0):
     string = R if string is None else string
     return re.sub(pattern, repl, string, count, flags)
 
+def _split_words(line):
+    """Splits line according to either WS or WRE."""
+    if WRE is None:
+        return line.split(WS)
+    else:
+        return re.split(WRE, line)
+
 # __________ INSERT USER CODE FOR --begin HERE __________
 
 # LN: Line Number; R: Raw Line
 for LN, R in enumerate(F):
     # Line conveniency variables.
-    L = R.strip()           # L: Line without whitespace arround.
-    if WRE is None:
-        W = L.split(WS)       # W: Words split on WS
-    else:
-        W = re.split(WRE, L)  # W: Words split on WRE
+    L = R.strip()           # L: Line without surrounding whitespaces.
+    W = _split_words(L)     # W: Words split on WS or WRE
     NW = len(W)             # Number of words
     # __________ INSERT USER CODE FOR --each-line HERE __________
 
