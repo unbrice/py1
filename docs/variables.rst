@@ -1,12 +1,7 @@
 Convenience variables
 =====================
 
-Follows a list of all the functions and variables you can use in Awk-like mode.
-
-.. warning::
-
-  These variables are available in Awk-like mode, that is when ``--begin``/``-b``, ``--each-line``/``-l``, ``--end``/``-e`` have been passed.
-  It is enough to pass any of the above to get them so ``py1 -b 'P(42)'`` works.
+Follows a list of the builtin functions and variables.
 
 
 Per-line
@@ -28,7 +23,7 @@ Per-line
      - The current line number
      - :py:class:`int`
    * - W
-     - Words of L split on WS or WRE
+     - Words of R split on WS or WRE
      - :py:class:`str`
    * - NW
      - Length of W
