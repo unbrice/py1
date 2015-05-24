@@ -35,12 +35,12 @@ One should use the right tool for the right task. But Learning 300 tools is coun
 
 Enters **py1**, it aims at being a "Python AWK".
 
-Indents and dedents can be replaced with “``{{``” and “``}}``”, line feeds can be replaced with “``;``”. An optional for loop iterates on input lines.
+Indents and dedents can be replaced with ``{{`` and ``}}``, line feeds can be replaced with ``;``. An optional for loop iterates on input lines.
 
 Usage
 -----
 
-Using "{{ }}" instead of indentation, and ";" to separate statements:
+Using ``{{`` ``}}`` instead of indentation, and ``;`` to separate statements:
 
 .. code-block:: bash
 
