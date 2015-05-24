@@ -26,11 +26,7 @@
 
 import io
 import unittest
-try:
-    from unittest import mock
-except ImportError:
-    # Allows compatibility with Python < 3.3 if mock is installed.
-    import mock
+from unittest import mock
 import sys
 
 from py1 import user_code_template

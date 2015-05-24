@@ -1,12 +1,10 @@
 language: python
 python:
-  - "3.2"
   - "3.3"
   - "3.4"
 install:
   - pip install --use-wheel --use-mirrors -r build-requirements.txt
   - pip install --use-wheel --use-mirrors coveralls
-  - python -c 'import sys; sys.exit(sys.version_info[:2] <= (3, 2))' || pip install --use-wheel --use-mirrors --upgrade "pygments==1.6"
 script:
   - coverage run --source=py1 setup.py test
   # Checks that pip can install the package.
