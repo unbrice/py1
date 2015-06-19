@@ -14,7 +14,7 @@ sys.stdin = io.StringIO('Monkey patched stdin from %s' % __name__)
 import re
 import sys
 import os
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 # Conveniency variables.
 ENV = os.environ   # ENV: dict of Environment strings
