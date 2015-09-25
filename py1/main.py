@@ -28,6 +28,7 @@ import sys
 from py1 import template_reader
 from py1 import constants
 from py1 import curly
+from py1 import imports
 from py1 import runner
 from py1 import tty
 
@@ -51,6 +52,9 @@ def _get_option_parser():
                    metavar='PY', help='Code run each line.')
     p.add_argument('-e', '--end', action='append', default=[],
                    metavar='PY', help='Code run once at the end.')
+    p.add_argument('-i', '--import', action='append', default=[],
+                   dest='import_list', metavar='IMPORT',
+                   help='Imports modules described in abbreviated form.')
     p.add_argument('-c', '--dump-code', '--code',
                    default=False,  # Value if not provided
                    const=_ARG_CONCISE,  # Value if provided without argument
@@ -84,8 +88,11 @@ def _uncurl_list_or_die(escaped_list):
 def main(args=None):
     parser = _get_option_parser()
     args = parser.parse_args(args)
+
+    begin = [imports.expand_short(i) for i in args.import_list]
+
     if args.single_snippet:
-        # We expect no options if given a single snippet.
+        # We expect no additional code if given a single snippet.
         for opt in ('begin', 'end', 'each_line'):
             if getattr(args, opt):
                 snippet = _abreviate(args.single_snippet)
@@ -93,9 +100,9 @@ def main(args=None):
                     '--%s is specified yet there is a lonely code snippet, try'
                     ' fixing quotes or adding --begin/-b before: "%s"' %
                     (opt, snippet))
-        begin = [args.single_snippet]
+        begin.append(args.single_snippet)
     else:
-        begin = args.begin
+        begin += args.begin
 
     code = template_reader.build_code(
         begin=_uncurl_list_or_die(begin),

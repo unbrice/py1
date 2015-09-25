@@ -4,6 +4,18 @@
 Examples
 ========
 
+Unix timestamp
+--------------
+
+Formats a Unix timestamp (1443214640) as a human-readable string.
+
+.. code:: bash
+
+    py1 -i 'time/ctime' 'P(ctime(1443214640))'
+
+To do so we import ctime from the time module and print it.
+
+
 Count blank lines
 -----------------
 
@@ -23,7 +35,7 @@ Show the second and third fields of ``/etc/passwd``, a file whose fields are sep
 
 .. code:: bash
 
-    cat /etc/passwd | py1 -b 'WS=":"' -l 'P(W[1:2])'
+    cat /etc/passwd | py1 -b 'WS=":"' -l 'P(W[1:2])'
 
 Here we override WS to use the "``:``" separator of ``/etc/passwd``.
 

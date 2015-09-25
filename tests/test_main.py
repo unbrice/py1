@@ -58,7 +58,8 @@ class TestMain(unittest.TestCase):
     def testAwkLike(self):
         """Test running valid code in awk-like mode."""
         with self.ioPatcher():
-            main.main(['-b', 'import io; F=io.StringIO("85\\n12")',
+            main.main(['-i', 'io',
+                       '-b', 'F=io.StringIO("85\\n12")',
                        '-b', 'count = 0',
                        '-l', 'count += int(L)',
                        '-e', 'P("count=",  count)',

@@ -8,8 +8,9 @@ Structure of this website
   intro
   examples
   variables
+  imports
   internals
-
+  
 Indices and tables
 ==================
 

@@ -36,8 +36,10 @@ For more examples, please see `http://py1.vleu.net/examples.html`. For the defin
 
 Options
 -------
-  
+
   -h, --help  show an help message and exit
+
+  -i IMPORT, --import IMPORT  imports modules described in abbreviated form
 
   -b CODE, --begin CODE  code run once first
 

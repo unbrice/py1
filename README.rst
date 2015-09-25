@@ -44,7 +44,7 @@ Using ``{{`` ``}}`` instead of indentation, and ``;`` to separate statements:
 
 .. code-block:: bash
 
-   py1 "import sys ; if True: {{ print(sys.version) }}"
+   py1 "a = 1+2; if a > 4: {{ print(a) }}"
 
 
 The wrapper script defines a convenient set of 1&2-letters variables and functions.
@@ -56,6 +56,12 @@ For example, to count lines matching ``'$a*^'``:
 
     py1 --begin "count=0" --each-line "if M('$a*^'): count += 1"
         --end "P(count)"
+
+Lastly the wrapper script provide a short notation to easily import modules.
+
+.. code-block:: bash
+
+    py1 --import "math/*" "P(cos(pi))"
 
 To learn more you can read the
 `list of one letter functions and variables <http://py1.vleu.net/page/variables.html>`_

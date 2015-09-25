@@ -54,6 +54,7 @@ setuptools.setup(
     py_modules=[
         'py1.constants',
         'py1.curly',
+        'py1.imports',
         'py1.main',
         'py1.runner',
     ],
