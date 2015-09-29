@@ -4,8 +4,8 @@ python:
   - "3.4"
   - "3.5"
 install:
-  - pip install --use-wheel --use-mirrors -r build-requirements.txt
-  - pip install --use-wheel --use-mirrors coveralls
+  - pip install --use-wheel -r build-requirements.txt
+  - pip install --use-wheel coveralls
 script:
   - coverage run --source=py1 setup.py test
   # Checks that pip can install the package.
