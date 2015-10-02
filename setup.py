@@ -23,17 +23,27 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from distutils.command import build
+from distutils.command import build as upstream_build
+from distutils.command import install as upstream_install
 import setuptools
 from sphinx import setup_command as sphinx_command
 
 from py1 import constants
 
 
-class build(build.build):
-    sub_commands = build.build.sub_commands + [
-        ('build_sphinx', None),
+class build(upstream_build.build):
+    """Builds man pages and spinx doc as well."""
+    sub_commands = upstream_build.build.sub_commands + [
         ('build_man', None),
+        ('build_sphinx', None),
+    ]
+
+
+class install(upstream_install.install):
+    """Builds man pages and spinx doc before to install."""
+    sub_commands = upstream_install.install.sub_commands + [
+        ('build_man', None),
+        ('build_sphinx', None),
     ]
 
 
@@ -63,8 +73,9 @@ setuptools.setup(
     data_files=[('share/man/man1', ['build/sphinx/man/py1.1'])],
     cmdclass={
         'build_man': sphinx_command.BuildDoc,
-        # Setups our build command that also builds the doc.
+        # Setups our build and install command that also builds the doc.
         'build': build,
+        'install': install,
     },
     command_options={
         'build_man': {
@@ -80,7 +91,7 @@ setuptools.setup(
 
     keywords='scripting awk one-liner oneliner',
 
-    # https://pypi.python.org/pypi?%3Aaction=list_classifiers
+    # https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
