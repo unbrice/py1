@@ -7,6 +7,7 @@ sudo: false
 install:
   - pip install --use-wheel -r build-requirements.txt
   - pip install --use-wheel coveralls
+  - pip install --use-wheel --upgrade setuptools
 script:
   - coverage run --source=py1 setup.py test
   # Checks that pip can install the package.
