@@ -24,7 +24,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 from distutils.command import build as upstream_build
-from distutils.command import install as upstream_install
+from setuptools.command import install as upstream_install
 import setuptools
 from sphinx import setup_command as sphinx_command
 
@@ -33,6 +33,7 @@ from py1 import constants
 
 class build(upstream_build.build):
     """Builds man pages and spinx doc as well."""
+
     sub_commands = upstream_build.build.sub_commands + [
         ('build_man', None),
         ('build_sphinx', None),
@@ -41,10 +42,11 @@ class build(upstream_build.build):
 
 class install(upstream_install.install):
     """Builds man pages and spinx doc before to install."""
-    sub_commands = upstream_install.install.sub_commands + [
-        ('build_man', None),
-        ('build_sphinx', None),
-    ]
+
+    def run(self):
+        self.run_command('build_man')
+        self.run_command('build_sphinx')
+        super().run()
 
 
 setuptools.setup(
