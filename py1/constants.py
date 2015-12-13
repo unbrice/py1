@@ -14,7 +14,7 @@ EPILOG="""examples:
   Counts empty lines:
   $ py1 'P(sum(1 if l else 0 for l in F))'
   Shows second and third fields of /etc/passwd:
-  $ cat /etc/passwd | py1 -b 'WS=":"' -l 'P(W[1:2])'
+  $ cat /etc/passwd | py1 -b 'WS=":"' -l 'P(W[1:2])'
   Sums key-value pairs:
   py1 -b 'd=defaultdict(int)' -l 'd[W[0]] += int(W[1])' -e 'P(d)'
 """
